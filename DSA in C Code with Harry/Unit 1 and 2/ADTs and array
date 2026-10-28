@@ -1,0 +1,54 @@
+//ADts : are the blueprint or instruction of the program. or modal to create  actual data structure. 
+//ADTs= set of values + set of  Operation
+//Abstraction : Hiding the implementation deatail. 
+//Array :- Cannot be resize
+// Why use array:- Accesing in the easy and faster.
+//Disadvantages:- If array is full than insertion is not possible and we have to create another array.
+// Deletion: deletion is also not easy.
+
+#include<stdio.h>
+#include<stdlib.h>
+struct myArray
+{
+    int total_size;
+    int used_size;
+    int *ptr; // Used to point the first element of the Array
+
+};
+// To have a structure from the address of the structure we use * and if want address from structure than use &  
+void createArray(struct myArray * a , int tsize, int usize){
+    (*a).total_size = tsize;
+    (*a).used_size = usize;
+    (*a).ptr = (int *)malloc(tsize* sizeof(int));  // Return the interger pointer to that memory block that has 
+    // been reserved in the heap
+}
+void show( struct myArray *a){   // Passing the addres of the structure my Array
+    for( int i=0; i< a->used_size; i++){
+        printf("%d \n", (a->ptr)[i]);
+        
+
+    }
+
+}
+void storeval( struct myArray *a){
+    int n;
+    for( int i=0; i< a->used_size; i++){
+        printf("Enter the value %d", i);
+        scanf("%d" , &n);
+        (a->ptr)[i]=n;
+        }
+
+    
+
+}
+int main(){
+    // Creating the instance of our ADTs my array
+    struct myArray marks;
+    createArray(&marks, 100, 5);
+    printf( "We are run to store the value \n");
+    storeval(&marks);
+    printf( "We are run to print the store the value \n");
+    show(&marks);
+
+    return 0; 
+}

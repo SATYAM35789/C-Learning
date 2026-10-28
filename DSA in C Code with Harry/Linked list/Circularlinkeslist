@@ -1,0 +1,88 @@
+// Circular linked list
+//  What to do to traversing in the circular linked list.
+//  p=head;
+//  while(p->!=head){
+//  print(p->data);
+//  p=p->next;
+//  }
+//  printf(p->data);
+
+// Searching is just like a traversing if you got the element peint that element.
+// Creating a empty linked list p->NULL;
+// Here head is a pointer.
+
+// Creating a empty circular linked list
+// Node where no data have been stored and point to next element is represented as circular linked list.
+// Node where no data have been stored and point to itself is called Circular empty liked list. 
+// Here a node is a node. 
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+struct Node{
+    int data;
+    struct Node * next;
+};
+
+    void linkedlisttraversal(struct Node *head){
+    struct Node *ptr = head;
+    printf("Element is %d\n",ptr->data);
+        ptr=ptr->next;
+    do{
+        printf("Element is %d\n",ptr->data);
+        ptr=ptr->next;
+    }while(ptr!=head);
+    
+}
+// Inserting in circular list at first
+struct Node *insertAtFirst(struct Node *head, int data){
+    struct Node *ptr = (struct Node*)malloc(sizeof(struct Node));
+    ptr->data=data;
+    struct Node *p = head->next;
+    while(p->next!=head){
+        p=p->next;
+    }
+    // at this p point to the last node of this  circular linked list
+    p->next=ptr;
+    ptr->next=head;
+    head = ptr;
+    return head;
+}
+
+int main(){
+
+    struct Node * head;
+    struct Node * second;
+    struct Node * third;
+    struct Node * fourth;
+    
+    // Allocate memory for in the linked list in Heap.
+    head = (struct Node*)malloc(sizeof(struct Node));
+    second = (struct Node*)malloc(sizeof(struct Node));
+    third = (struct Node*)malloc(sizeof(struct Node));
+    fourth = (struct Node*)malloc(sizeof(struct Node));
+
+    // linked first and second node.
+    head->data = 4;
+    head->next= second;
+
+    // linked second and third node.
+    second->data = 3;
+    second->next= third;
+
+// linked second and third node.
+    third->data = 6;
+    third->next= fourth;
+
+//  Terminate the list at the fourth element
+    fourth->data = 1;
+    fourth->next= head;
+    printf("Cicular linked list before inserting");
+    linkedlisttraversal(head); 
+
+    head = insertAtFirst(head,80);
+    printf("Cicular linked list before inserting");
+    linkedlisttraversal(head);
+
+    return 0;
+}

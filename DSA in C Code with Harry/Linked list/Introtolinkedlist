@@ -1,0 +1,54 @@
+// What is linked list and why to use linked list at the place of  array. 
+// There is two way we can use to allocate any datatype, function,etc 
+// 1. Static memory allocation ex. int arr[20];
+// 2. Heap memory allocation ex. int *ptr=(int*)malloc(n*sizeof(int)) (Dynamic Memory allocatio)
+// limitation of array
+// 1. Capacity is limited. 
+// Linked list :- 
+// 1. Not in a contigous. 2. expamding the size is easy. 3.Insertion is easy. 4. Deletion is easy.
+//  
+// CREATION AND TRAVERSAL IN LINKED LIST
+// Meaning of 'point kar raha' the element having the the address of next element. 
+// Null: Declaring the end of the list. 
+//  Linked list can be implemented using a structure in c. 
+// 1. step  struct Node{
+//                int data;
+//                struct Node* next;
+//           }
+// step 2. Creating 1st node or Head node
+//      head = (struct Node*)malloc(sizeof(struct Node))      Here 'head' is struct pointer. 
+
+// Traversal in linked list.
+// Creating a pointer (head) . And move this pointer each and every node. 
+
+#include<stdio.h>
+#include<stDlib.h>
+
+struct Node{
+    int data;
+    struct Node * next;
+};
+int main(){
+    struct Node * head;
+    struct Node * second;
+    struct Node * third;
+    // Allocate memory for in the linked list in Heap.
+    head = (struct Node*)malloc(sizeof(struct Node));
+    second = (struct Node*)malloc(sizeof(struct Node));
+    third = (struct Node*)malloc(sizeof(struct Node));
+
+    // linked first and second node.
+    head->data = 7;
+    head->next= second;
+
+    // linked second and third node.
+    second->data = 11;
+    second->next= third;
+
+    // Terminate the list at third node. 
+    third->data = 66;
+    third->next= NULL;
+
+    return 0;
+
+}

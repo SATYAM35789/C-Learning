@@ -1,0 +1,76 @@
+// Doubly linked lists
+// Node = previous address, data , next address.
+// Head:- A head is pointer that givers the access of the linked list. 
+// uses : reverse is easy.
+// Criteria of being the Head: privious node address = Null
+// Criteria to check the last : next node address = null 
+//  struct Node{
+//      int data;
+//      struct Node *prev;
+//      struct Node *next;
+//   }
+
+// Creating a doubly linked list 
+// struct Node *N1 = (struct  Node *)malloc(sizeof(struct Node)) similarly for N2,N3,N4.
+
+// Linking the different node
+// 1st Node
+// N1->next=N2;      
+// N1->prev=NULL;
+
+
+// Doing with muself.
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node{
+    int data;
+    struct Node *prev;
+    struct Node * next;
+};
+void Linkelisttraversinginrightside(struct Node * ptr)
+{
+    while(ptr!=NULL)
+    {
+    printf(" Element:%d\n", ptr->data);
+    ptr=ptr->next;
+    }
+}
+
+
+int main(){
+    struct Node * head;
+    struct Node * second;
+    struct Node * third;
+    struct Node * fourth;
+    // Allocate memory for in the linked list in Heap.
+    head = (struct Node*)malloc(sizeof(struct Node));
+    second = (struct Node*)malloc(sizeof(struct Node));
+    third = (struct Node*)malloc(sizeof(struct Node));
+    fourth = (struct Node*)malloc(sizeof(struct Node));
+
+    // linked first and second node.
+    head->prev = NULL;
+    head->data = 7;
+    head->next= second;
+
+    // linked second and third node.
+    second->prev=head->next;
+    second->data = 11;
+    second->next= third;
+
+// linked second and third node.
+    third->next=second->next;
+    third->data = 67;
+    third->next= fourth;
+
+//  Terminate the list at the fourth element
+    fourth->prev=third->next;
+    fourth->data = 66;
+    fourth->next= NULL;
+    
+    printf("Print the element at right side in doubly linked list");
+    Linkelisttraversinginrightside(head);
+
+    return 0;
+}

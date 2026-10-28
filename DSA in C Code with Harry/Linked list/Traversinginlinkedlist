@@ -1,0 +1,44 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node{
+    int data;
+    struct Node * next;
+};
+
+// Traversing a linked list. Input head node. 
+void Linkelisttraversing(struct Node * ptr)
+{
+    while(ptr!=NULL)
+    {
+    printf(" Element:%d\n", ptr->data);
+    ptr=ptr->next;
+    }
+}
+
+int main(){
+    struct Node * head;
+    struct Node * second;
+    struct Node * third;
+    // Allocate memory for in the linked list in Heap.
+    head = (struct Node*)malloc(sizeof(struct Node));
+    second = (struct Node*)malloc(sizeof(struct Node));
+    third = (struct Node*)malloc(sizeof(struct Node));
+
+    // linked first and second node.
+    head->data = 7;
+    head->next= second;
+
+    // linked second and third node.
+    second->data = 11;
+    second->next= third;
+
+    // Terminate the list at third node. 
+    third->data = 66;
+    third->next= NULL;
+
+    Linkelisttraversing(head);
+
+    return 0;
+
+}

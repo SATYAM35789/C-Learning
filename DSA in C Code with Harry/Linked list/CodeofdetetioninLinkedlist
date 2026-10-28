@@ -1,0 +1,118 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct Node{
+    int data;
+    struct Node * next;
+};
+
+// Traversing a linked list. Input head node. 
+void Linkelisttraversing(struct Node * ptr)
+{
+    while(ptr!=NULL)
+    {
+    printf(" Element:%d\n", ptr->data);
+    ptr=ptr->next;
+    }
+}
+
+// Case1. Deleting the first element from the linked list
+struct Node *deletefirst(struct Node *head){
+    struct Node *ptr = head;
+    head = head->next;
+    free(ptr);
+    return head;
+
+}
+
+// Case2 Deleting the node in between the linked list
+struct Node *deleteAtIndex(struct Node *head , int index){
+    struct Node *p = head;
+    struct Node *q = head->next;
+    for (int i = 0; i<index-1; i++){  // Thist loop leave the head node and start  from next
+       p = p->next;                   // And this loop is used to move the above pointer to desire position.
+       q = q->next;
+    }
+    p->next = q->next;
+    free(q);
+    return head;
+
+}
+// Case3. Deleting the Last element from the linked list
+struct Node *deleteAtLast(struct Node *head){
+    struct Node *p = head;
+    struct Node *q = head->next;
+    while(q->next != NULL){
+        p=p->next;
+        q=q->next;
+    }
+    p->next= NULL;
+    free(q);
+    return head;
+
+}
+
+// Case4 Deleting the node ( address /value of node given not need to traverse)
+struct Node *deleteAtValue(struct Node *head , int value){
+    struct Node *p = head;
+    struct Node *q = head->next;
+    while( q->data !=value && q->next !=NULL ) {  
+       p = p->next;                   // And this loop is used to move the above pointer to desire position.
+       q = q->next;
+    }
+    if(q->data == value){   // If false true means weare at last
+       p->next = q->next;
+       free(q);
+    }
+    return head;
+
+}
+
+int main(){
+    struct Node * head;
+    struct Node * second;
+    struct Node * third;
+    struct Node * fourth;
+    // Allocate memory for in the linked list in Heap.
+    head = (struct Node*)malloc(sizeof(struct Node));
+    second = (struct Node*)malloc(sizeof(struct Node));
+    third = (struct Node*)malloc(sizeof(struct Node));
+    fourth = (struct Node*)malloc(sizeof(struct Node));
+
+    // linked first and second node.
+    head->data = 7;
+    head->next= second;
+
+    // linked second and third node.
+    second->data = 11;
+    second->next= third;
+
+    // linked second and third node.
+    third->data = 67;
+    third->next= fourth;
+
+//  Terminate the list at the fourth element
+    fourth->data = 66;
+    fourth->next= NULL;
+
+    printf("linked list before deletion \n");
+    Linkelisttraversing(head);
+
+    //head = deletefirst(head);  // for deleting the first element of the linked list
+    //printf("linked list before deletion \n");
+    //Linkelisttraversing(head);
+
+    //head = deleteAtIndex(head,2);  // for deleting  element at given position of the linked list
+    //printf("linked list before deletion \n");
+    //Linkelisttraversing(head);
+
+    //head = deleteAtLast(head);  // for deleting  element at last linked list
+    //printf("linked list before deletion \n");
+    //Linkelisttraversing(head);
+
+    head = deleteAtValue(head, 67);  // Case4
+    printf("linked list before deletion \n");
+    Linkelisttraversing(head);
+
+    return 0;
+
+}

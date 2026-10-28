@@ -1,0 +1,23 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int findKthPositiveInteger(vector<int> &arr, int k)
+{
+    int start = 0, end = arr.size() - 1, mid, ans = arr.size();
+
+    while (start <= end)
+    {
+        mid = start + (end - start) / 2;
+
+        // left side
+        if (arr[mid] - mid - 1 >= k)
+        {
+            ans = mid;
+            end = mid - 1;
+        }
+        else // Right move
+            start = mid + 1;
+    }
+    return ans + k;
+}
